@@ -2,17 +2,17 @@
 using System.Collections;
 
 public class moblin : MonoBehaviour {
-    Transform playerWithCamera;
-    public float movementSpeed = 1f;
+    Transform player;
+    public float movementSpeed = 2f;
 
 	// Use this for initialization
 	void Start () {
-        playerWithCamera = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player").transform.FindChild("Link").transform;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 moblinMovementVector = (playerWithCamera.position - transform.position).normalized*movementSpeed*Time.deltaTime;
-        transform.Translate(moblinMovementVector * movementSpeed);
+        Vector3 moblinMovementVector = (player.position - transform.position).normalized*movementSpeed*Time.deltaTime;
+        transform.Translate(moblinMovementVector);
 	}
 }
