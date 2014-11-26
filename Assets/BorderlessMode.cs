@@ -17,7 +17,7 @@ public class BorderlessMode : MonoBehaviour
     
     #if UNITY_STANDALONE_WIN && !UNITY_EDITOR
     [DllImport("user32.dll")]
-    static extern IntPtr SetWindowLong (IntPtr hwnd, int  _nIndex, int  dwNewLong);
+    static extern IntPtr SetWindowLongPtr (IntPtr hwnd, int  _nIndex, int  dwNewLong);
     
     [DllImport("user32.dll")]
     static extern bool SetWindowPos (IntPtr hWnd, int hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
@@ -33,7 +33,7 @@ public class BorderlessMode : MonoBehaviour
     {
         if(IsFullscreen)
             ScreenPosition = GetFullscreenResolution();
-        SetWindowLong (GetForegroundWindow (), GWL_STYLE, WS_BORDER);
+        SetWindowLongPtr (GetForegroundWindow (), GWL_STYLE, WS_BORDER);
         bool result = SetWindowPos (GetForegroundWindow (), 0, (int)ScreenPosition.x, (int)ScreenPosition.y, (int)ScreenPosition.width, (int)ScreenPosition.height, SWP_SHOWWINDOW);
     }
     #endif
