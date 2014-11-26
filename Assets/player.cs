@@ -3,13 +3,13 @@ using System.Collections;
 
 public class player : MonoBehaviour {
     Transform link;
-    Transform playerWithCamera;
+    GameObject playerWithCamera;
     public float movementSpeed = 8f;
 
 	// Use this for initialization
 	void Start () {
         link = transform.FindChild("Link");
-        playerWithCamera = GameObject.FindGameObjectWithTag("Player").transform;
+        //playerWithCamera = GameObject.FindGameObjectWithTag("Player");
         Cursor.SetCursor(Texture2D.blackTexture,new Vector2(0,0),CursorMode.Auto);
 	}
 	
@@ -18,7 +18,7 @@ public class player : MonoBehaviour {
 
         //movement
         Vector3 playerMovementVector = new Vector3(Input.GetAxisRaw("Horizontal"),0,Input.GetAxisRaw("Vertical")).normalized*movementSpeed*Time.deltaTime;
-		playerWithCamera.Translate(playerMovementVector);
+		transform.Translate(playerMovementVector);
 
         //face the cursor
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
