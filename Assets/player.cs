@@ -10,7 +10,6 @@ public class player : MonoBehaviour {
 	void Start () {
         link = transform.FindChild("Link");
         //playerWithCamera = GameObject.FindGameObjectWithTag("Player");
-        Cursor.SetCursor(Texture2D.blackTexture,new Vector2(0,0),CursorMode.Auto);
 	}
 	
 	// Update is called once per frame
