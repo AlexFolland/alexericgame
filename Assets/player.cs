@@ -23,16 +23,10 @@ public class player : MonoBehaviour {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Physics.Raycast(ray, out hit);
-        if(hit.collider.gameObject.tag == "Terrain"){
+        //if(hit.collider.gameObject.tag == "Terrain"){
             Vector3 lookTarget = hit.point;
             lookTarget.y += link.transform.position.y; // character's vertical position; a little above ground
             link.transform.LookAt(lookTarget);
-        }
-        else if(hit.collider.gameObject.tag == "Floor")
-        {
-            Vector3 lookTarget = hit.point;
-            lookTarget.y += link.transform.position.y; // character's vertical position; a little above ground
-            link.transform.LookAt(lookTarget);
-        }
+        //}
 	}
 }
