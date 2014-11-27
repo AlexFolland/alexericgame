@@ -3,7 +3,7 @@ using System.Collections;
 
 public class player : MonoBehaviour {
     Transform link;
-    GameObject playerWithCamera;
+
     public float movementSpeed = 8f;
 
 	// Use this for initialization
