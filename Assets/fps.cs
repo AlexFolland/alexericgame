@@ -25,6 +25,6 @@ public class fps : MonoBehaviour {
             frameCount = 0;
             dt -= 1.0f/updateRate;
         }
-        txt.text = Mathf.Floor(framerate).ToString() + " fps";
+        txt.text = GameObject.FindGameObjectWithTag("Sword").GetComponent<Animator>().GetCurrentAnimatorStateInfo(-1).IsName("melee horizontal arc").ToString() + " " + Mathf.Floor(framerate).ToString() + " fps";
 	}
 }

@@ -3,20 +3,21 @@ using System.Collections;
 
 public class sword : MonoBehaviour {
     private Animator animator;
-    Component[] trailRenderers;
-    //Transform trailNode;
-    //Object trail;
+    //Component[] trailRenderers;
+    public Object trailNode;
+    GameObject trail;
 
 	// Use this for initialization
 	void Start()
     {
         animator = GetComponent<Animator>();
-        trailRenderers = GetComponentsInChildren<TrailRenderer>();
+        //trailRenderers = GetComponentsInChildren<TrailRenderer>();
     }
     
     // Update is called once per frame
 	void Update()
     {
+        //attack
         if(Input.GetButtonDown("Fire1"))
         {
             //to do:
@@ -31,34 +32,32 @@ public class sword : MonoBehaviour {
             // if animating
             if(animator.GetBool ("melee horizontal arc"))
             {
+                // disable trail
+                Destroy (trail);
+
                 //rewind to allow another animation to start
                 animator.Play("melee horizontal arc", -1, 0f);
             }
 
             // play animation
             animator.SetBool("melee horizontal arc",true);
+            transform.renderer.enabled = false;
 
             // enable trail
-            //trail = Instantiate (trailNode, new Vector3(0, 0, 0), Quaternion.identity);
+            trail = (GameObject)Instantiate(trailNode, transform.position, transform.rotation);
 
-            foreach(Component trailNode in trailRenderers)
-            {
-                trailNode.GetComponent<TrailRenderer>().enabled = true;
-            }
+            // set trail as child
+            trail.transform.SetParent(transform);
         }
 	}
 
     public void AnimationEnd()
     {
         // disable trail
-        //Destroy (trail);
+        Destroy (trail);
 
-        foreach (Component trailNode in trailRenderers)
-        {
-            trailNode.GetComponent<TrailRenderer>().enabled = false;
-        }
-        
-        //idle
+        // idle
         animator.SetBool("melee horizontal arc",false);
+        transform.renderer.enabled = true;
     }
 }
