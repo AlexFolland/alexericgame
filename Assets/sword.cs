@@ -3,7 +3,7 @@ using System.Collections;
 
 public class sword : MonoBehaviour {
     private Animator animator;
-    //Component[] trailRenderers;
+    //private TimedTrailRenderer trail;
     public Object trailNode;
     GameObject trail;
 
@@ -11,7 +11,7 @@ public class sword : MonoBehaviour {
 	void Start()
     {
         animator = GetComponent<Animator>();
-        //trailRenderers = GetComponentsInChildren<TrailRenderer>();
+        //trail = GetComponent<TimedTrailRenderer>();
     }
     
     // Update is called once per frame
@@ -20,44 +20,25 @@ public class sword : MonoBehaviour {
         //attack
         if(Input.GetButtonDown("Fire1"))
         {
-            //to do:
-            //
-            // -implement game
-            // -ship it
-            // -profit
-            // -live the dream
-            //
-            ////////////////////////////////////////////////////////////////////
-
-            // if animating
-            if(animator.GetBool ("melee horizontal arc"))
-            {
-                // disable trail
-                Destroy (trail);
-
-                //rewind to allow another animation to start
-                animator.Play("melee horizontal arc", -1, 0f);
-            }
+            if(trail) Destroy(trail);
 
             // play animation
-            animator.SetBool("melee horizontal arc",true);
-            transform.renderer.enabled = false;
-
-            // enable trail
-            trail = (GameObject)Instantiate(trailNode, transform.position, transform.rotation);
-
-            // set trail as child
-            trail.transform.SetParent(transform);
+            animator.SetTrigger("melee horizontal arc");
         }
 	}
 
-    public void AnimationEnd()
+    public void InstantiateTrail()
+    {
+        // enable trail
+        trail = (GameObject)Instantiate(trailNode,transform.position,transform.rotation);
+        
+        // set trail as child
+        trail.transform.SetParent(transform);
+    }
+
+    public void DestroyTrail()
     {
         // disable trail
         Destroy (trail);
-
-        // idle
-        animator.SetBool("melee horizontal arc",false);
-        transform.renderer.enabled = true;
     }
 }
