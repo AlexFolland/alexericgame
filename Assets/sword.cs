@@ -20,10 +20,12 @@ public class sword : MonoBehaviour {
         //attack
         if(Input.GetButtonDown("Fire1"))
         {
-            if(trail) Destroy(trail);
-
             // play animation
-            animator.SetTrigger("melee horizontal arc");
+            //if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
+            //{
+                if(trail) Destroy(trail);
+                animator.SetTrigger("melee horizontal arc");
+            //}
         }
 	}
 
