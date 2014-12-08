@@ -13,21 +13,35 @@ public class sword : MonoBehaviour {
         animator = GetComponent<Animator>();
         //trail = GetComponent<TimedTrailRenderer>();
     }
-    
+
     // Update is called once per frame
-	void Update()
-    {
+    void Update()
+    {/*
         //attack
-        if(Input.GetButtonDown("Fire1"))
+        if(e.type == EventType.MouseDown && e.button == 0)
         {
             // play animation
             //if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
             //{
-                if(trail) Destroy(trail);
-                animator.SetTrigger("melee horizontal arc");
+            if(trail) 
+            {
+                trail.GetComponent<OptimizedTrailRenderer>().MakeTrailDestroyItsWeirdOffspring();
+                Destroy(trail);
+            }
+            animator.SetTrigger("melee horizontal arc");
             //}
         }
-	}
+    */}
+
+    public void MeleeHorizontalArc()
+    {
+        if(trail) 
+        {
+            trail.GetComponent<OptimizedTrailRenderer>().MakeTrailDestroyItsWeirdOffspring();
+            Destroy(trail);
+        }
+        animator.SetTrigger("melee horizontal arc");
+    }
 
     public void InstantiateTrail()
     {
@@ -41,6 +55,7 @@ public class sword : MonoBehaviour {
     public void DestroyTrail()
     {
         // disable trail
-        Destroy (trail);
+        trail.GetComponent<OptimizedTrailRenderer>().MakeTrailDestroyItsWeirdOffspring();
+        Destroy(trail);
     }
 }
